@@ -1,0 +1,13 @@
+{%include 'navbar.html'%}
+<h1>Register Page</h1>
+
+<form action="" method="POST">
+    {%csrf_token%}
+    <table>
+        {{form.as_table}}
+        <tr>
+            <td><input type="submit" value="save"></td>
+            <td><input type="reset" value="reset"></td>
+        </tr>
+    </table>
+</form>

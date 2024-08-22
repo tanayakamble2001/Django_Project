@@ -1,0 +1,18 @@
+.navbar{
+    background-color: burlywood;
+}
+
+.nav-list{
+    list-style-type: none;
+    
+}
+
+.nav-item{
+    display: inline-block;
+    margin-top: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
