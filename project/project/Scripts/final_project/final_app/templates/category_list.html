@@ -1,0 +1,71 @@
+{%include 'navbar.html'%}
+{%load static%}
+
+<link rel="stylesheet" href="{%static 'css/bmin.css'%}">
+<style>
+    *{
+        list-style: none;
+        text-decoration: none;
+    }
+    .grid1{
+        background-color: #e24646;
+        width: 200px;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        margin-top: -16px;
+
+    }
+
+    .cate_list a{
+        text-decoration: none;
+        display: block;
+        padding-left: 20px;
+        margin-top: 20px;
+    }
+
+    .all_cate{
+        color: black;
+    }
+    
+    .all_catelist{
+        color: black;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .main{
+        padding-left: 210px;
+    }
+</style>
+    
+<div class="grid1">
+    <div class="cate_list">
+        <a href="/product">
+            <div class="all_catelist">
+                
+                <p>All Products</p>
+            </div>
+        </a>
+        
+        {%for i in Cate%}
+        <a href="/filter/{{i.id}}">
+            <div class="all_cate">
+                
+                <p>{{ i.category_name }}</p>
+            </div>
+        </a>
+        {%endfor%}
+    </div>
+</div>
+
+<div class="main">
+    {%block body%}
+    
+    {%endblock%}
+</div>
+        
+
+<script src="{%static 'js/bmin.js'%}"></script>
+<script src="{%static 'js/p.js'%}"></script>

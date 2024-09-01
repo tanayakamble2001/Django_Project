@@ -1,34 +1,102 @@
 {%load static%}
-<link rel="stylesheet" href="{%static 'css/style.css'%}">
+{%block content%}
+<style>
+    .menubar{
+        background-color: black;
+        position: sticky;
+        top: 0;
+        
+    }
+    .menu-ul{
+        list-style-type: none;
+    }
+    .menu-li{
+        display: inline-block;
+        /*margin-top: 20px;    */
+        padding: 10PX;
+    }
+    .anch{
+        text-decoration: none;
+        color: #ffff;
+        font-family: "PublicSans Regular", Sans-Serif;
+        font-weight: 600;   
+        margin-bottom: 15px;
+    }
+    .div1{
+        width: 500px;
+        height: 28px;
+        display: flex;
+        background-color: #ffff;
+        border-radius: 15px;
+        border: none;
+        text-align: center;
+    }
 
-<nav class="navbar">
-    <div class="container">
-        <div class="collapse">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="/">Home</a>
+    .txt{
+        width: 450px;
+        height: 28px;
+        border-radius: 15px;
+        border: none;
+        text-align: center;
+    }
+
+    .srch{
+        height: 20px;
+        border: none;
+        background-color: #ffff;
+        
+    }
+</style>
+
+<nav class="menubar">
+    <div class="contain">
+        <div class="menu">
+            <ul id="menu-ul">
+                <li class="menu-li">
+                    <a href="/" class="anch">Gift Forever</a>
                 </li>
-                <li class="nav-item">
-                    <a href="register">Registration</a>
+                <li class="menu-li">
+                    <a href="product" class="anch">Product</a>
                 </li>
-                <li class="nav-item">
-                    <a href="login">Login</a>
+                <li class="menu-li">
+                    <div class="div1">
+                        <form action="product_search" method="post" > 
+                            {%csrf_token%}
+                            <input type="text" placeholder="Search Here" name="srch" class="txt"  >
+                            <button type="submit" value="search" class="srch">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                  </svg>
+                            </button>
+                        </form>
+                    </div>
+                    
                 </li>
-                <li class="nav-item">
-                    <a href="logout">Logout</a>
+                {%if user.is_authenticated%}
+                <li class="menu-li">
+                    <a href="clist" class="anch"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                      </svg></a>
                 </li>
-                <li class="nav-item">
-                    <a href="product">Product</a>
+                <li class="menu-li">
+                    <a href="logout" class="anch"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                      </svg>Logout</a>
                 </li>
-                <li class="nav-item">
-                    <form action="">
-                        <input type="search" placeholder="Search">
-                        <button type="submit">Search</button>
-                    </form>
+                {%else%}
+                <li class="menu-li">
+                    <a href="register" class="anch">Sign Up</a>
                 </li>
+                <li class="menu-li">
+                    <a href="login" class="anch"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                      </svg>Login</a>
+                </li>
+                {%endif%}
+                
             </ul>
             
         </div>
     </div>
 </nav>
-
+{%endblock content%}

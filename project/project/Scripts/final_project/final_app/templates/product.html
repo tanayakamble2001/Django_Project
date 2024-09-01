@@ -1,18 +1,27 @@
-{%include 'navbar.html'%}
+
+{%extends 'category_list.html'%}
 {%load static%}
+{%block body%}
 <link rel="stylesheet" href="{%static 'css/bmin.css'%}">
-<h1>Product List</h1>
+
+<style>
+
+  .card-body{
+    position: absolute;
+  }
+</style>
 
 <hr>
+
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
-
+      {%if pl%}
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {%for i in pl%}
-        <div class="col">
+        <div class="col" >
           <div class="card shadow-sm">
             <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
-            <div class="card-body">
+            <div class="card-body" title="{{i.product.category}}">
               <img src="{{i.img}}" alt="Image not uploaded" width="100%" height="300px">
               <p class="card-text">{{i.p_name}}</p>
               <p class="card-text">{{i.p_price}}</p>
@@ -20,7 +29,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary"><a href="addtocart/{{i.id}}">AddToCart</a></button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <!--<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
                 </div>
                 <small class="text-body-secondary">9 mins</small>
               </div>
@@ -29,9 +38,12 @@
         </div>
         {%endfor%}
       </div>
+      {%else%}
+      <h1>No product found...</h1>
+      {%endif%}
     </div>
   </div>
-<hr>
 
 <script src="{%static 'js/bmin.js'%}"></script>
 <script src="{%static 'js/p.js'%}"></script>
+{%endblock%}

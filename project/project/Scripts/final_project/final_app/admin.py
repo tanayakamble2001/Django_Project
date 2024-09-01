@@ -8,5 +8,5 @@ admin.site.register(Category,CategoryAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
     list_display=['id','p_name','p_price','p_description','category']
-    list_filter=['p_name','p_price']
+    list_filter=['p_name','p_price','category']
 admin.site.register(Product,ProductAdmin)

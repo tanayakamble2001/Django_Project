@@ -1,0 +1,69 @@
+{%include 'navbar.html'%}
+{%load static%}
+<link rel="stylesheet" href="{%static 'css/bmin.css'%}">
+
+<style>
+    .addcart{
+        display: inline-block;
+        box-sizing: border-box;
+    }
+    .cart{
+        width: 30%;
+        box-sizing: border-box;
+    }
+
+    .total{
+        width: 25%;
+        /*background-color: blueviolet;*/
+        position: fixed;
+        top: 150px;
+        right: 20px;
+        box-sizing: border-box;
+    }
+</style>
+
+<h1>Cart List</h1>
+
+
+<div class="addcart">
+    <div class="cart">
+        <table class="table">
+            <tr>
+                <td>Image</td>
+                <td>Product Name</td>
+                <td>Product Price</td>
+                <td>Product Quantity</td>
+                <td>User</td>
+                <td>Sub-Total</td>
+                <td>Action</td>
+            </tr>
+            {%for i in cl%}
+            <tr>
+                <td><img src="{{i.product.img}}" alt="Image not uploaded" width="100px" height="100px"></td>
+                <td>{{i.product.p_name}}</td>
+                <td>{{i.product.p_price}}</td>
+                <td><input type="number" name="qty" value="1" min="1" onchange="updateSubtotal(this)" ></td> 
+                <td>{{i.user.username}}</td>
+                <td><input type="text" class="subtotal" value="{{i.product.p_price}}"></td>  
+                <td><a href="remove/{{i.id}}">Remove</a></td>
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+    
+
+    <div class="total">
+        <h5 id="total">Final Total:Rs. <span id="total-value">0.00/-</span></h5>
+        <h5 id="gst">GST (18%): Rs. <span id="gst-value">0.00/-</span></h5>
+        <h5 id="invoice-total">Invoice Total: Rs. <span id="invoice-total-value">0.00/-</span></h5>
+        <button>PROCEED TO CHECKOUT</button>
+    </div>
+
+</div>
+
+<script src="{%static 'js/bmin.js'%}"></script>
+<script src="{%static 'js/p.js'%}"></script>
+<script src="{%static 'js/static.js'%}"></script>
+
+
+

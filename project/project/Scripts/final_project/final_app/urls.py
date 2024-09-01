@@ -25,4 +25,12 @@ urlpatterns = [
     path('login',v.login_view),
     path('logout',v.logout_view),
     path('product',v.product_view),
+    path('addtocart/<int:pid>',v.add_to_cart,name="addtocart"),
+    path('clist',v.cartlist_view),
+    path('remove/<int:pro>',v.remove_view),
+    path('product_search',v.prod_search_view),
+    #path('filter/<int:pid>/',v.filter_cate_view),
+    path('product/<str:category_name>/',v.category_page,name='category_page'),
+    path('sidebar',v.sidebar),
+    path('filter/<int:pid>',v.filter_cate),
 ]
