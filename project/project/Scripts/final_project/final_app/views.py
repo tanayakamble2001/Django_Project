@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate,login,logout
 from .models import Product,Cart,Category
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 
 
@@ -12,25 +13,46 @@ def home(request):
 
 def register_view(request):
     if request.method == 'POST':
-        f=UserCreationForm(request.POST)
-        f.save()
+        #f=UserCreationForm(request.POST)
+        uname=request.POST.get('username')
+        passw=request.POST.get('password')
+        c_passw=request.POST.get('c_password')
+        u=User()
+        u.username=uname
+        u.password=passw
+        user=User.objects.filter(username=uname)
+        if len(uname) > 10:
+            messages.error(request, "Username must be under 10 character.")
+            return redirect('/register')
+        if passw != c_passw:
+            messages.error(request, "Passwords do not match.")
+            return redirect('/register')
+        if user.exists():
+            messages.info(request, "Username is already taken. ")
+            return redirect('/register')
+        u.save()
+        messages.info(request, "Account Created Successfully.")
         return redirect('/')
     else:
-        f=UserCreationForm
-        context={'form':f}
-        return render(request,'register.html',context)
+        return render(request,'register.html')
     
 def login_view(request):
     if request.method == 'POST':
         uname=request.POST.get('username')
         passw=request.POST.get('password')
         user=authenticate(request,username=uname,password=passw)
-        if user is not None:
-            request.session['uid']=user.id
-            login(request,user)
-            return redirect('/')
+        user1=User.objects.filter(username=uname)
+        if user1.exists():
+            if user is not None:
+                request.session['uid']=user.id
+                login(request,user)
+                return redirect('/')
+            else:
+                return render(request,'login.html')
         else:
-            return render(request,'login.html')
+            messages.info(request, "You are not Register.")
+            return redirect('/login')
+        
         
     else:
         return render(request,'login.html')

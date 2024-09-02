@@ -19,10 +19,7 @@
         height: 68px;
     }
     
-    tr{
-        padding-top: 10PX;
-        margin-top: 20px;
-    }
+    
     .button{
         width: 262px;
         height: 40px;
@@ -38,6 +35,15 @@
         width: 262px;
         height: 40px;
     }
+
+    .alert-primary{
+        width: 262px;
+        height: 40px;
+        border-radius: 5px;
+        align-content: center;
+        background-color: #cfe2ff;
+        color: #222f42;
+    }
 </style>
 
 
@@ -45,29 +51,36 @@
 <div class="login">
     <div class="heading">
         <h1>Sign in</h1>
-        <p>You do not have account?<a href="register">SIGN UP</a></p>
-        <br><br><br>
     </div>
     <form action="" method="POST">
         {%csrf_token%}
+        {% if messages %}
+        {{ message.tags }}
+        <div class="alert-primary" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
         <table class="tbl">
             <tr>
                 <td>Username:</td>
             </tr>
             <tr>
-                <td><input type="text" name="username" placeholder="Enter username" class="inpt"></td>
+                <td><input type="text" name="username" placeholder="Enter username" class="inpt" required></td>
             </tr>
             <tr>
                 <td>Password:</td>
             </tr>
             <tr>
-                <td><input type="password" name="password" placeholder="Enter Password" class="inpt"></td>
+                <td><input type="password" name="password" placeholder="Enter Password" class="inpt" required></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="SIGN IN" class="button"></td>
             </tr>
         </table>
     </form>
+    <p>Don't have account? <a href="register">SIGN UP</a></p>
 </div>
 
 <script src="{%static 'js/bmin.js'%}"></script>
