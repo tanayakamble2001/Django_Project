@@ -29,8 +29,9 @@ urlpatterns = [
     path('clist',v.cartlist_view),
     path('remove/<int:pro>',v.remove_view),
     path('product_search',v.prod_search_view),
-    #path('filter/<int:pid>/',v.filter_cate_view),
     path('product/<str:category_name>/',v.category_page,name='category_page'),
     path('sidebar',v.sidebar),
     path('filter/<int:pid>',v.filter_cate),
+    path('update_cart/<int:item_id>/<str:action>/',v.update_cart, name='update_cart'),
+    path('success',v.success_view),
 ]
