@@ -42,7 +42,6 @@
 
 <div class="addcart">
     <div class="cart">
-        {%for i in cl%}
         
         <table class="table">
             <tr>
@@ -78,12 +77,11 @@
             </tr>
             {%endfor%}
         </table>
-        {%endfor%}
     </div>
     
 
     <div class="total">
-        <h5 id="total">Final Total:Rs. <span>/-</span></h5>
+        <h5 id="total">Final Total:Rs. <span id="total-value">0.00/-</span></h5>
         <!--<h5 id="gst">GST (18%): Rs. <span id="gst-value">0.00/-</span></h5>
         <h5 id="invoice-total">Invoice Total: Rs. <span id="invoice-total-value">0.00/-</span></h5>-->
     </div>
@@ -92,7 +90,7 @@
 
 <script src="{%static 'js/bmin.js'%}"></script>
 <script src="{%static 'js/p.js'%}"></script>
-<!--<script src="{%static 'js/static.js'%}"></script>-->
+<script src="{%static 'js/static.js'%}"></script>
 
 <form action="/success" method="POST">
     {% csrf_token %}
